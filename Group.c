@@ -5,15 +5,17 @@ void Speeds(double Speed, double Target_Speed); // Prototype Function
 
 int main()
 {
-    Speeds(80, 30); 
+    Speeds(600, 0); 
     return 0;
 }
 
 void Speeds(double Speed, double Target_Speed)
 {
-
     double Time = 0;
     double dt = 0.1; // Setting dt as 0.1 
+
+    double Res = 0.8*dt;      // constants
+    double Drag = 0.0002*dt;
 
     double Kp = 0.4; 
     double Ki = 0.01; 
@@ -25,17 +27,13 @@ void Speeds(double Speed, double Target_Speed)
 
     double Prev_Error = 0;
     double Accel = 0;
-    
-    double Drag = 0;
-    double Res = 0;
-
 
 if (Speed < Target_Speed) // If we are Accelerating
     {
     while(Speed <= Target_Speed)
         {
         if((int)(Time * 1 + 0.05) % 1 == 0) // To print in second intervals use this
-        {printf("Time = %5.1f | Speed = %5f | Error= %5f\n", Time, Speed, Error);}
+        {printf("Time = %-3.1f | Speed = %-6.2f | Acceleration = %-4.2f | Error = %-6.2f | Derivative = %-7.2f | Integral = %-5.2f\n", Time, Speed, Accel, Error, Derivative, Integral);}
         
         Error = Target_Speed - Speed;
 
@@ -47,10 +45,6 @@ if (Speed < Target_Speed) // If we are Accelerating
 
         if(Accel > 8){Accel = 8;}
         else if(Accel < 0){Accel = 0;}
-
-        Res = 0.8*dt;
-
-        Drag = 0.0002*dt;
 
         Speed = (Speed/(1+Drag*Speed))-Res+Accel;
 
@@ -66,13 +60,8 @@ else // If we are not Accelerating then we must be Decelerating
     {
     while(Speed >= Target_Speed)
         {
-
-        if((int)(Time * 10 + 0.5) % 10 == 0) // To print in second intervals use this
-        {printf("Time = %5.1f | Speed = %-10.2f\n", Time, Speed);}
-
-        Res = 0.8*dt;
-
-        Drag = 0.0002*dt;
+        // if((int)(Time * 10 + 0.5) % 10 == 0) // To print in second intervals use this
+        {printf("Time = %-4.1f | Speed = %-3.2f\n", Time, Speed);}
 
         Speed = (Speed/(1+Drag*Speed))-Res;
 
