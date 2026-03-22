@@ -5,7 +5,7 @@ void Speeds(double Speed, double Target_Speed); // Prototype Function
 
 int main()
 {
-    Speeds(50, 80);
+    Speeds(80, 30);
     return 0;
 }
 
@@ -34,8 +34,9 @@ if (Speed < Target_Speed) // If we are Accelerating
     {
     while(Speed <= Target_Speed)
         {
-        printf("Time = %5.1f | Speed = %5f | Error= %5f\n", Time, Speed, Error);
-
+        if((int)(Time * 1 + 0.05) % 1 == 0) // To print in second intervals use this
+        {printf("Time = %5.1f | Speed = %5f | Error= %5f\n", Time, Speed, Error);}
+        
         Error = Target_Speed - Speed;
 
         Derivative = (Error - Prev_Error)/dt;
@@ -65,7 +66,9 @@ else // If we are not Accelerating then we must be Decelerating
     {
     while(Speed >= Target_Speed)
         {
-        printf("Time = %5.1f | Speed = %5f | Error= %5f\n", Time, Speed, Error);
+
+        if((int)(Time * 1 + 0.05) % 1 == 0) // To print in second intervals use this
+        {printf("Time = %5.1f | Speed = %-10.2f\n", Time, Speed);}
 
         Res = 0.8*dt;
 
