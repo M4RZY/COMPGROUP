@@ -13,7 +13,7 @@ void Speeds(double Speed, double Target_Speed)
 {
 
     double Time = 0;
-    double dt = 0.1; // Setting dt as 0.1
+    double dt = 0.1; // Setting dt as 0.1 
 
     double Kp = 0.4; 
     double Ki = 0.01; 
@@ -79,3 +79,11 @@ else // If we are not Accelerating then we must be Decelerating
         }
     }
 }
+
+/*
+Excel Print
+--------------
+printf("%.1f, %.2f, %.2f\n", Time, Speed, Accel); 
+Use this instead of the one that is there
+
+*/
