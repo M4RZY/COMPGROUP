@@ -1,11 +1,10 @@
 #include <stdio.h>
-#include <Windows.h> // for the Sleep function
 
 void Speeds(double Speed, double Target_Speed); // Prototype Function
 
 int main()
 {
-    Speeds(600, 0); 
+    Speeds(50, 80); 
     return 0;
 }
 
@@ -32,11 +31,11 @@ if (Speed < Target_Speed) // If we are Accelerating
     {
     while(Speed <= Target_Speed)
         {
-        if((int)(Time * 1 + 0.05) % 1 == 0) // To print in second intervals use this
-        {printf("Time = %-3.1f | Speed = %-6.2f | Acceleration = %-4.2f | Error = %-6.2f | Derivative = %-7.2f | Integral = %-5.2f\n", Time, Speed, Accel, Error, Derivative, Integral);}
-        
         Error = Target_Speed - Speed;
 
+        //if((int)(Time * 1 + 0.05) % 1 == 0) // To print in second intervals use this
+        {printf("Time = %-3.1f | Speed = %-6.2f | Acceleration = %-4.2f | Error = %-6.2f | Derivative = %-7.2f | Integral = %-5.2f\n", Time, Speed, Accel, Error, Derivative, Integral);}
+        
         Derivative = (Error - Prev_Error)/dt;
     
         Integral += Error;
@@ -51,8 +50,6 @@ if (Speed < Target_Speed) // If we are Accelerating
         Prev_Error = Error;
 
         Time += dt;
-
-        Sleep(100);
         }
     }
 
@@ -66,8 +63,6 @@ else // If we are not Accelerating then we must be Decelerating
         Speed = (Speed/(1+Drag*Speed))-Res;
 
         Time += dt;
-
-        Sleep(100);
         }
     }
 }
